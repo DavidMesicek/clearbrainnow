@@ -220,7 +220,10 @@ footer {
 <script data-goatcounter="https://clearbrainnow.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
 (function() {
+  var pollCount = 0;
+  var maxPolls = 100;
   var pollInterval = setInterval(function() {
+    pollCount++;
     if (window.goatcounter && window.goatcounter.visit_count) {
       clearInterval(pollInterval);
       window.goatcounter.visit_count({
@@ -229,14 +232,34 @@ footer {
         no_branding: true,
         style: 'color: #999; font-size: 0.85em;'
       });
-      // Replace "visitors" with "Buyers"
-      setTimeout(function() {
+      // Replace "visitors" with "Buyers" - try multiple times
+      function replaceText() {
         var counterElement = document.getElementById('gc-visitors');
         if (counterElement) {
-          counterElement.textContent = counterElement.textContent.replace(/visitors?/gi, 'Buyers');
-          counterElement.innerHTML = counterElement.innerHTML.replace(/visitors?/gi, 'Buyers');
+          var text = counterElement.textContent || counterElement.innerHTML || '';
+          if (text && (text.includes('visitor') || text.includes('Visitor'))) {
+            counterElement.textContent = text.replace(/visitors?/gi, 'Buyers');
+            counterElement.innerHTML = counterElement.innerHTML.replace(/visitors?/gi, 'Buyers');
+          }
         }
-      }, 500);
+      }
+      setTimeout(replaceText, 300);
+      setTimeout(replaceText, 800);
+      setTimeout(replaceText, 1500);
+      setTimeout(replaceText, 3000);
+      // Watch for changes
+      var observer = new MutationObserver(replaceText);
+      var counterElement = document.getElementById('gc-visitors');
+      if (counterElement) {
+        observer.observe(counterElement, { childList: true, subtree: true, characterData: true });
+      }
+    } else if (pollCount >= maxPolls) {
+      clearInterval(pollInterval);
+      // Fallback: show that counter is loading
+      var counterElement = document.getElementById('gc-visitors');
+      if (counterElement && !counterElement.textContent) {
+        counterElement.innerHTML = '<span style="color: #999; font-size: 0.85em;">Loading...</span>';
+      }
     }
   }, 100);
 })();
