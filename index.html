@@ -221,39 +221,30 @@ footer {
   <p>This page is not medical advice.<br>Individual experiences may vary.</p>
 </footer>
 
+<script data-goatcounter="https://clearbrainnow.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
-var t = setInterval(function() {
+(function() {
+  var pollInterval = setInterval(function() {
     if (window.goatcounter && window.goatcounter.visit_count) {
-        clearInterval(t)
-        window.goatcounter.visit_count({append: '#gc-visitors'})
-        // Remove "stats by GoatCounter" and change "Views for this page:" to "Buyers"
-        setTimeout(function() {
-            var counterElement = document.getElementById('gc-visitors');
-            if (counterElement) {
-                var text = counterElement.innerHTML || counterElement.textContent || '';
-                // Remove "stats by GoatCounter"
-                text = text.replace(/stats by GoatCounter/gi, '');
-                // Change "Views for this page:" to "Buyers"
-                text = text.replace(/Views for this page:/gi, 'Buyers');
-                counterElement.innerHTML = text;
-                counterElement.textContent = text;
-            }
-        }, 500);
-        setTimeout(function() {
-            var counterElement = document.getElementById('gc-visitors');
-            if (counterElement) {
-                var text = counterElement.innerHTML || counterElement.textContent || '';
-                text = text.replace(/stats by GoatCounter/gi, '');
-                text = text.replace(/Views for this page:/gi, 'Buyers');
-                counterElement.innerHTML = text;
-                counterElement.textContent = text;
-            }
-        }, 1500);
+      clearInterval(pollInterval);
+      window.goatcounter.visit_count({
+        append: '#gc-visitors',
+        type: 'html',
+        no_branding: true,
+        style: 'color: #999; font-size: 0.85em;'
+      });
+      // Change "Views for this page:" to "Buyers"
+      setTimeout(function() {
+        var counterElement = document.getElementById('gc-visitors');
+        if (counterElement) {
+          counterElement.textContent = counterElement.textContent.replace(/Views for this page:/gi, 'Buyers');
+          counterElement.innerHTML = counterElement.innerHTML.replace(/Views for this page:/gi, 'Buyers');
+        }
+      }, 500);
     }
-}, 100)
+  }, 100);
+})();
 </script>
-<script data-goatcounter="https://clearbrainnow.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
 
 </body>
 </html>
