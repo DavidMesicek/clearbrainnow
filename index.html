@@ -232,6 +232,13 @@ footer {
         no_branding: true,
         style: 'color: #999; font-size: 0.85em;'
       });
+      // Replace "visitors" with "buyers" in the counter text
+      setTimeout(function() {
+        var counterElement = document.getElementById('gc-visitors');
+        if (counterElement) {
+          counterElement.textContent = counterElement.textContent.replace(/visitors?/gi, 'buyers');
+        }
+      }, 500);
     }
   }, 100);
 })();
