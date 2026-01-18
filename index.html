@@ -128,6 +128,33 @@ body::before {
   color: #999;
   margin-top: 10px;
 }
+.what-is-it {
+  margin-bottom: 50px;
+}
+.what-is-it h2 {
+  font-weight: 400;
+  font-size: 1.5em;
+  margin-bottom: 25px;
+  color: #fff;
+}
+.what-is-it p {
+  font-size: 1.05em;
+  color: #e0e0e0;
+  line-height: 1.8;
+  margin-bottom: 15px;
+}
+.visitor-counter {
+  text-align: center;
+  margin: 40px 0;
+  padding: 10px;
+  color: #e0e0e0;
+  font-size: 1.2em;
+  border: 1px solid #333;
+  background: rgba(255, 255, 255, 0.05);
+  max-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
 footer {
   margin-top: 80px;
   padding-top: 30px;
@@ -166,14 +193,41 @@ footer {
   <p>It surprised me how subtle it felt.</p>
 </section>
 
+<section class="what-is-it">
+  <h2>So what is it, exactly?</h2>
+  <p>It's a short audio experience<br>designed to help your mind slow down<br>and reset from constant stimulation.</p>
+  <p>You don't need to believe anything.<br>You don't need to understand how it works.</p>
+  <p>You just listen.</p>
+  <p>Many people use it as part of their evening<br>or quiet focus routine.</p>
+</section>
+
 <section class="cta">
   <a href="https://052fap-kymcqap3713tl7ez864.hop.clickbank.net" class="cta-button">See how it works</a>
   <p class="cta-subtext">Takes less than 2 minutes</p>
 </section>
 
+<div class="visitor-counter" id="gc-visitors"></div>
+
 <footer>
   <p>This page is not medical advice.<br>Individual experiences may vary.</p>
 </footer>
+
+<script data-goatcounter="https://clearbrainnow.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+<script>
+(function() {
+  var pollInterval = setInterval(function() {
+    if (window.goatcounter && window.goatcounter.visit_count) {
+      clearInterval(pollInterval);
+      window.goatcounter.visit_count({
+        append: '#gc-visitors',
+        type: 'html',
+        no_branding: true,
+        style: 'color: #999; font-size: 0.85em;'
+      });
+    }
+  }, 100);
+})();
+</script>
 
 </body>
 </html>
