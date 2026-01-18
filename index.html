@@ -221,71 +221,35 @@ footer {
   <p>This page is not medical advice.<br>Individual experiences may vary.</p>
 </footer>
 
-<script data-goatcounter="https://clearbrainnow.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 <script>
-(function() {
-  var counterLoaded = false;
-  
-  function loadCounter() {
-    if (window.goatcounter && window.goatcounter.visit_count && !counterLoaded) {
-      counterLoaded = true;
-      window.goatcounter.visit_count({
-        append: '#gc-visitors',
-        type: 'html',
-        no_branding: true,
-        style: 'color: #999; font-size: 0.85em;'
-      });
-      
-      // Replace "visitors" with "Buyers" - try multiple times
-      function replaceText() {
-        var counterElement = document.getElementById('gc-visitors');
-        if (counterElement) {
-          var text = counterElement.textContent || counterElement.innerHTML || '';
-          if (text && text.trim() && (text.includes('visitor') || text.includes('Visitor'))) {
-            counterElement.textContent = text.replace(/visitors?/gi, 'Buyers');
-            counterElement.innerHTML = counterElement.innerHTML.replace(/visitors?/gi, 'Buyers');
-          }
-        }
-      }
-      
-      // Try multiple times with increasing delays
-      setTimeout(replaceText, 500);
-      setTimeout(replaceText, 1000);
-      setTimeout(replaceText, 2000);
-      setTimeout(replaceText, 4000);
-      
-      // Watch for changes
-      var observer = new MutationObserver(function() {
-        replaceText();
-      });
-      var counterElement = document.getElementById('gc-visitors');
-      if (counterElement) {
-        observer.observe(counterElement, { childList: true, subtree: true, characterData: true });
-      }
+var t = setInterval(function() {
+    if (window.goatcounter && window.goatcounter.visit_count) {
+        clearInterval(t);
+        window.goatcounter.visit_count({
+            append: '#gc-visitors',
+            type: 'html',
+            no_branding: true,
+            style: 'color: #999; font-size: 0.85em;'
+        });
+        // Replace "visitors" with "Buyers"
+        setTimeout(function() {
+            var counterElement = document.getElementById('gc-visitors');
+            if (counterElement) {
+                counterElement.textContent = counterElement.textContent.replace(/visitors?/gi, 'Buyers');
+                counterElement.innerHTML = counterElement.innerHTML.replace(/visitors?/gi, 'Buyers');
+            }
+        }, 500);
+        setTimeout(function() {
+            var counterElement = document.getElementById('gc-visitors');
+            if (counterElement) {
+                counterElement.textContent = counterElement.textContent.replace(/visitors?/gi, 'Buyers');
+                counterElement.innerHTML = counterElement.innerHTML.replace(/visitors?/gi, 'Buyers');
+            }
+        }, 1500);
     }
-  }
-  
-  // Poll for goatcounter
-  var pollCount = 0;
-  var maxPolls = 200; // Increased to 20 seconds
-  var pollInterval = setInterval(function() {
-    pollCount++;
-    loadCounter();
-    if (counterLoaded || pollCount >= maxPolls) {
-      clearInterval(pollInterval);
-    }
-  }, 100);
-  
-  // Also try after page load
-  if (document.readyState === 'complete') {
-    setTimeout(loadCounter, 1000);
-  } else {
-    window.addEventListener('load', function() {
-      setTimeout(loadCounter, 1000);
-    });
-  }
-})();
+}, 100);
 </script>
+<script data-goatcounter="https://clearbrainnow.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
 
 </body>
 </html>
