@@ -233,14 +233,6 @@ footer {
         no_branding: true,
         style: 'color: #999; font-size: 0.85em;'
       });
-      // Change "Views for this page:" to "Buyers"
-      setTimeout(function() {
-        var counterElement = document.getElementById('gc-visitors');
-        if (counterElement) {
-          counterElement.textContent = counterElement.textContent.replace(/Views for this page:/gi, 'Buyers');
-          counterElement.innerHTML = counterElement.innerHTML.replace(/Views for this page:/gi, 'Buyers');
-        }
-      }, 500);
     }
   }, 100);
 })();
